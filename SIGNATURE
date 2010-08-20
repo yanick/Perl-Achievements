@@ -1,0 +1,39 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.64.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 7de2d3580e7d19ed8ba6db0794568a4d53446643 Build.PL
+SHA1 58a7cdbaa7959582526b1563e9af74bf879edba2 Changes
+SHA1 3ee0d276167c367325eebe1d5ec9877ade504d93 LICENSE
+SHA1 4b76b96f5d5b92bb8cfca5bc4b8ad947cc755261 MANIFEST
+SHA1 ddcedab094c480d0920667d2353c7265153fbf51 MANIFEST.SKIP
+SHA1 a249c5ab14a59a4e11fda30c6c5b91ea52913308 META.json
+SHA1 f58ad96cf1320d596a090b2fa11c9e4334d8413e META.yml
+SHA1 68a7beaf8034b7d2af7711d2957b7c77fbfc22a3 dist.ini
+SHA1 16489f25884a9ee70e350e44a29c5c7adc71ac2d lib/Perl/Achievements.pm
+SHA1 4027db70254889b894242bad8b58b48bb8cb562f lib/Perl/Achievements/Achievement.pm
+SHA1 d1c47c7669b81100bc988a997f57e886ecca77b3 lib/Perl/Achievements/Achievement/Cryptomancer.pm
+SHA1 f94438e3bef4d113ac170ae5583ed888048f5322 lib/Perl/Achievements/Achievement/PerlHacker.pm
+SHA1 99b0085638b3682cbc47b802696cda065f913c0c lib/Perl/Achievements/UnlockedAchievement.pm
+SHA1 c92255cbf0a2ace40072fc2a5284e25a9e43eef9 lib/Perl/Achievements/woohoo
+SHA1 c1650f84fd4d865148418fdf76d58a37efa6f996 scripts/perl-achievements
+SHA1 050aa113e828a52db3c86065c0c0ed50198b7ce8 t/000-report-versions.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkxuhu4ACgkQ34Hwf+GwC4zQ/QCgvqXN4kBBbM62d8oYSEaHr9nk
+TW8AoL2cormynX83liF45tNFR/CNmzRE
+=c83k
+-----END PGP SIGNATURE-----

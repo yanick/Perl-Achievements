@@ -1,0 +1,40 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+
+=head2 OPTIONS
+
+=over
+
+=item --run
+
+Runs the program after analyzing it.
+
+=item --list
+
+Lists all achievements unlocked so far.
+
+=back
+
+=cut
+
+GetOptions( \my %arg,
+    'run!',
+    'list!',
+);
+
+use Perl::Achievements;
+
+my $app = Perl::Achievements->new;
+
+exit $app->list_achievements if $arg{list};
+
+if ( $arg{run} ) {
+    $app->run( @ARGV );
+}
+else {
+    $app->peruse( @ARGV );
+}

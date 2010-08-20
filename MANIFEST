@@ -7,7 +7,6 @@ META.json
 META.yml
 SIGNATURE
 dist.ini
-foo.pl
 lib/Perl/Achievements.pm
 lib/Perl/Achievements/Achievement.pm
 lib/Perl/Achievements/Achievement/Cryptomancer.pm

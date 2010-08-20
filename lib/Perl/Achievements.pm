@@ -1,4 +1,5 @@
 package Perl::Achievements;
+# ABSTRACT: whoever die() with the most badges win
 
 use strict;
 use warnings;

@@ -1,9 +1,17 @@
 #!/usr/bin/env perl
 
+package
+    perlachievements;
+
+
 use strict;
 use warnings;
 
 use Getopt::Long;
+
+=head1 NAME
+
+perl-achievements - run some perl, collect some badges
 
 =head2 OPTIONS
 
@@ -38,3 +46,5 @@ if ( $arg{run} ) {
 else {
     $app->peruse( @ARGV );
 }
+
+__END__

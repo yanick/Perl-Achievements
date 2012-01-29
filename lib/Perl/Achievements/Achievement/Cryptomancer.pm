@@ -27,20 +27,25 @@ sub details {
     "Variables used: " . join ', ', @{$_[0]->variables};
 }
 
-sub check {
+sub scan {
     my $self = shift;
 
-    my $magic = $self->app->ppi->find( 'PPI::Token::Magic' ) or return;
+    my $magic = $self->ppi->find( 'PPI::Token::Magic' ) or return;
 
     my @vars = @{ $self->variables };
 
     my @new_vars = uniq @vars, map { $_->content } @$magic;
 
-    return if @vars == @new_vars;
+    return if $self->level == @new_vars;
+
+    $self->set_level( scalar @new_vars );
 
     $self->variables( \@new_vars );
 
-    $self->unlock_achievement;
+    my %vars = map { $_ => 1 } @vars;
+    @new_vars = sort grep { !$vars{$_} } @new_vars;
+
+    $self->unlock( "new magic variables used: ". join ', ', @new_vars );
 }
 
 

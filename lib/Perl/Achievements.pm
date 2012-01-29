@@ -8,7 +8,7 @@ no warnings qw/ uninitialized /;
 
 use Moose;
 use MooseX::SemiAffordanceAccessor;
-
+use MooseX::Role::Loggable;
 use MooseX::Storage;
 
 use Module::Pluggable
@@ -20,16 +20,14 @@ use PPI;
 use File::HomeDir;
 use Path::Class;
 use Method::Signatures;
+use DateTime::Functions;
 
 extends 'MooseX::App::Cmd';
 
-with 'MooseX::ConfigFromFile';
-
-with Storage( format => 'YAML', io => 'File' );
+with 'MooseX::Role::Loggable';
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;
-
 
 }
 
@@ -43,6 +41,13 @@ has rc => (
     lazy => 1,
 );
 
+sub rc_file_path {
+    my ( $self, @path ) = @_;
+
+    return file( $self->rc, @path );
+}
+
+
 has _achievements => (
     traits => [ 'Array' ], 
     is      => 'ro',
@@ -50,26 +55,6 @@ has _achievements => (
     handles => {
         achievements => 'elements',
         add_achievements => 'push',
-    },
-);
-
-has _new_achievements => (
-    traits => [ 'Array' ], 
-    is      => 'rw',
-    default => sub { [] },
-    handles => {
-        new_achievements => 'elements',
-        add_new_achievement => 'push',
-    },
-);
-
-has _unlocked_achievements => (
-    traits => [ 'Array' ],
-    default => sub{ [] },
-    is => 'ro',
-    handles => {
-        unlocked_achievements => 'elements',
-        add_unlocked_achievements => 'push',
     },
 );
 
@@ -82,7 +67,6 @@ has ppi => (
     traits => [ qw/ DoNotSerialize / ],
     is => 'rw',
 );
-
 sub BUILD {
     my $self = shift;
 
@@ -107,29 +91,19 @@ sub BUILD {
 
 }
 
-sub xrun {
-    my ( $self, @args ) = @_;
+#sub xrun {
+#    my ( $self, @args ) = @_;
 
-    $self->peruse( @args );
+#    $self->peruse( @args );
 
-    exec 'perl', @args;
-}
+#    exec 'perl', @args;
+#}
 
-sub peruse {
-    my ( $self, @args ) = @_;
-
-    my $file = $args[-1];
+method scan ($file) {
 
     $self->set_ppi( PPI::Document->new( $file ) );
 
-    my @new_achievements = map { $_->check } $self->achievements;
-
-    if ( my @new_achievements = $self->new_achievements ) {
-        $self->advertise( @new_achievements );
-        $self->add_unlocked_achievements( @new_achievements );
-    }
-
-    $self->store( $self->rc );
+    $_->scan for $self->achievements;
 }
 
 sub list_achievements {
@@ -148,7 +122,7 @@ sub _achievements_builder {
 
     my @checks;
 
-    push @checks, $_->new( app => $self ) for $self->plugins;
+    push @checks, $_->load_or_new( app => $self ) for $self->plugins;
 
     return \@checks;
 }
@@ -181,5 +155,26 @@ method initialize_environment {
     mkdir $dir;
     mkdir dir( $dir, 'achievements' );
 }
+
+sub unlock_achievement {
+    my ( $self, $achievement, $details ) = @_;
+
+    $self->add_to_history( 
+        achievement => ref($achievement),
+        timestamp => ''.now(),
+        ( level => $achievement->level ) x ( $achievement->level > 0 ) ,
+        ( details => $details ) x !!$details,
+    );
+
+}
+
+sub add_to_history {
+    my $self = shift;
+    my %info = @_;
+    my $file = $self->rc_file_path( 'history' );
+    open my $fh, '>>', $file;
+    print {$fh} Dump \%info;
+}
+
 
 1;

@@ -1,4 +1,5 @@
 package Perl::Achievements::Achievement::Cryptomancer;
+# ABSTRACT: uses Perl magic variables
 
 use strict;
 use warnings;
@@ -12,22 +13,11 @@ use List::MoreUtils qw/ uniq any/;
 
 with 'Perl::Achievements::Achievement';
 
-sub description { 'Used Perl magic variables.' };
-
 has variables => (
     traits => [ qw/ Perl::Achievements::Role::ConfigItem / ],
     is => 'rw',
     default => sub { [] },
 );
-
-sub subtitle {
-    my @vars = @{$_[0]->variables};
-    return "Level " . @vars;
-}
-
-sub details {
-    "Variables used: " . join ', ', @{$_[0]->variables};
-}
 
 sub scan {
     my $self = shift;
@@ -49,8 +39,6 @@ sub scan {
 
     $self->unlock( "new magic variables used: ". join ', ', @new_vars );
 }
-
-
 
 1;
 

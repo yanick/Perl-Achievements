@@ -1,4 +1,5 @@
 package Perl::Achievements::Achievement::PerlHacker;
+# ABSTRACT: just another Perl hacker
 
 use strict;
 use warnings;
@@ -14,14 +15,6 @@ has locs => (
     is      => 'rw',
     handles => { add_locs => 'add', },
 );
-
-sub title { 'Just Another Perl Hacker' }
-
-sub subtitle { "Level " . $_[0]->level }
-
-sub details { "Ran >" . 10**$_[0]->level . " LOCs." }
-
-sub description { 'Did what Perl hackers do: run code.' }
 
 sub scan {
     my $self = shift;

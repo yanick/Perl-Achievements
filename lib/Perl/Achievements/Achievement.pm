@@ -111,17 +111,4 @@ sub store {
     DumpFile( shift, \%data );
 }
 
-sub title {
-    my $title = ref shift;
-    $title =~ s/^.*:://;
-    $title =~ s/([a-z])([A-Z])/$1 $2/g;
-
-    return $title;
-}
-
-sub subtitle { undef }
-
-sub details {  undef }
-
-
 1;

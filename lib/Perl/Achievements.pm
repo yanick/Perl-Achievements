@@ -1,5 +1,26 @@
 package Perl::Achievements;
-# ABSTRACT: whoever die() with the most badges win
+# ABSTRACT: whoever die()s with the most badges win
+
+=head1 SYNOPSIs
+
+    use Perl::Achievements;
+
+    my $judge = Perl::Achievements->new;
+
+    $judge->scan( $file );
+
+=head1 DESCRIPTION
+
+If you want to use C<perl-achievement>, look 
+at L<perlachievements>.
+
+If you want to implement a new achievement,
+look at L<Perl::Achievements::Achievement>.
+
+WARNING: C<Perl::Achievements> is young, rough,
+and subject to change. You've been warned.
+
+=cut
 
 use 5.10.0;
 
@@ -32,6 +53,7 @@ with qw/
 sub get_config_from_file {
     my ( $class, $file ) = @_;
 
+    # TODO
 }
 
 has rc => (
@@ -69,54 +91,12 @@ has rc => (
 has ppi => (
     is => 'rw',
 );
-sub BUILD {
-    my $self = shift;
-
-    return unless -f $self->rc;
-
-    my $ref = YAML::Any::LoadFile( $self->rc );
-
-    for ( @{ $ref->{_unlocked_achievements} } ) {
-        $self->add_unlocked_achievements(
-            Perl::Achievements::UnlockedAchievement->new( %$_ ) );
-    }
-
-    for my $achievement ( @{ $ref->{_achievements} } ) {
-        my ( $ach ) = grep { ref($_) eq $achievement->{'__CLASS__'} } $self->achievements
-            or next;
-        while( my( $k, $v ) = each %$achievement ) {
-            next if $k eq '__CLASS__';
-            $ach->$k( $v );
-        }
-    }
-
-
-}
-
-#sub xrun {
-#    my ( $self, @args ) = @_;
-
-#    $self->peruse( @args );
-
-#    exec 'perl', @args;
-#}
 
 method scan ($file) {
 
     $self->set_ppi( PPI::Document->new( $file ) );
 
     $_->scan for $self->achievements;
-}
-
-sub list_achievements {
-    my $self = shift;
-
-    for ( $self->unlocked_achievements ) {
-        print join " - ", $_->timestamp->date, $_->title;
-        print " - ", $_->subtitle if $_->subtitle;
-        print "\n";
-    }
-
 }
 
 sub _achievements_builder {

@@ -1,0 +1,29 @@
+#!/usr/bin/env perl
+
+package
+    perlachievements;
+
+=head1 NAME
+
+perlachievements - run some perl, collect some badges
+
+=head1 SYNOPSIS
+
+    # create the config directories and such
+    $ perlachievements init
+
+    # scan files, collect acheivements!
+    $ perlachievements scan my_script.pl
+
+    # get list of commands
+    $ perlachievements commands
+    
+
+=cut
+
+use strict;
+use warnings;
+
+use Perl::Achievements;
+
+Perl::Achievements->run;

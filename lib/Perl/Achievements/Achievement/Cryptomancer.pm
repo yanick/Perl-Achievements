@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Moose;
+use MooseX::SemiAffordanceAccessor;
 
 no warnings qw/ uninitialized /;
 
@@ -14,6 +15,7 @@ with 'Perl::Achievements::Achievement';
 sub description { 'Used Perl magic variables.' };
 
 has variables => (
+    traits => [ qw/ Perl::Achievements::Role::ConfigItem / ],
     is => 'rw',
     default => sub { [] },
 );
@@ -40,7 +42,7 @@ sub scan {
 
     $self->set_level( scalar @new_vars );
 
-    $self->variables( \@new_vars );
+    $self->set_variables( \@new_vars );
 
     my %vars = map { $_ => 1 } @vars;
     @new_vars = sort grep { !$vars{$_} } @new_vars;

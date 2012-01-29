@@ -1,7 +1,5 @@
 #!/usr/bin/env perl
 
-$/ = "";
-
 package
     perlachievements;
 
@@ -21,38 +19,3 @@ use Getopt::Long;
 
 perl-achievements - run some perl, collect some badges
 
-=head2 OPTIONS
-
-=over
-
-=item --run
-
-Runs the program after analyzing it.
-
-=item --list
-
-Lists all achievements unlocked so far.
-
-=back
-
-=cut
-
-GetOptions( \my %arg,
-    'run!',
-    'list!',
-);
-
-use Perl::Achievements;
-
-my $app = Perl::Achievements->new;
-
-exit $app->list_achievements if $arg{list};
-
-if ( $arg{run} ) {
-    $app->run( @ARGV );
-}
-else {
-    $app->peruse( @ARGV );
-}
-
-__END__

@@ -5,35 +5,36 @@ use warnings;
 
 use Moose::Role;
 
-use MooseX::Storage;
 use MooseX::SemiAffordanceAccessor;
-use YAML::Any qw/ LoadFile /;
+
+use YAML::Any qw/ LoadFile DumpFile /;
+use DateTime::Functions qw/ now /;
 
 with 'MooseX::ConfigFromFile';
-with Storage( format => 'YAML', io => 'File' );
 
 requires qw/ scan /;
 
-has '+configfile' => (
-    'traits' => [ 'DoNotSerialize' ],
-);
-
 has 'app' => (
-    traits => [ 'DoNotSerialize' ],
     required => 1,
     is => 'ro',
     handles => [ qw/ ppi log log_debug / ],
 );
 
 has level => (
-    traits => [ 'Number' ],
+    traits => [ 'Perl::Achievements::Role::ConfigItem', 'Number' ],
     isa => 'Num|Undef',
     is => 'rw',
     default => undef,
-    handles => {
-        inc_level => [ add => 1 ],
-    },
 );
+
+sub inc_level {
+    my ( $self, $value ) = @_;
+    $value ||= 1;
+    $self->set_level(
+        $self->level + $value
+    );
+}
+
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;
@@ -65,20 +66,50 @@ sub load_or_new {
 sub unlock {
     my ($self, $details ) = @_;
 
-    $self->app->unlock_achievement( $self, $details );
+    $self->app->unlock_achievement( 
+        achievement => ref($self),
+        timestamp => ''.now(),
+        ( level => $self->level ) x ( $self->level > 0 ) ,
+        ( details => $details ) x !!$details,
+    );
 }
+
+before scan => sub {
+    my $self = shift;
+    $self->log_debug( "scanning for achievement " . ref $self );
+};
 
 after scan => sub {
     my $self = shift;
 
     $self->log_debug( 'storing state of ' . ref $self );
 
-    $DB::single = 1;
-    $self->pack;
-
     $self->store( "".$self->app->rc_file_path( 
         'achievements', $self->storage_file ) );
 };
+
+sub pack {
+    my $self = shift;
+
+    my %data;
+
+    for my $attr ( map { $self->meta->get_attribute($_) } 
+                       $self->meta->get_attribute_list ) {
+        next unless $attr->does('Perl::Achievements::Role::ConfigItem');
+
+        my $name = $attr->name;
+        $data{$name} = $self->$name;
+    }
+
+    return %data;
+}
+
+sub store {
+    my $self = shift;
+
+    my %data = $self->pack;
+    DumpFile( shift, \%data );
+}
 
 sub title {
     my $title = ref shift;
@@ -92,18 +123,5 @@ sub subtitle { undef }
 
 sub details {  undef }
 
-sub unlock_achievement {
-    my $self = shift;
-
-    $self->app->add_new_achievement(
-    Perl::Achievements::UnlockedAchievement->new(
-        title => $self->title,
-        subtitle => $self->subtitle ,
-        details => $self->details,
-        description => $self->description,
-        achievement => ref $self,
-    ) );
-
-}
 
 1;

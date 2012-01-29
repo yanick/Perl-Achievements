@@ -1,6 +1,8 @@
 package Perl::Achievements;
 # ABSTRACT: whoever die() with the most badges win
 
+use 5.10.0;
+
 use strict;
 use warnings;
 
@@ -8,8 +10,6 @@ no warnings qw/ uninitialized /;
 
 use Moose;
 use MooseX::SemiAffordanceAccessor;
-use MooseX::Role::Loggable;
-use MooseX::Storage;
 
 use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
@@ -21,10 +21,13 @@ use File::HomeDir;
 use Path::Class;
 use Method::Signatures;
 use DateTime::Functions;
+use Data::Printer;
 
 extends 'MooseX::App::Cmd';
 
-with 'MooseX::Role::Loggable';
+with qw/ 
+    MooseX::Role::Loggable
+/;
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;
@@ -64,7 +67,6 @@ has rc => (
 );
 
 has ppi => (
-    traits => [ qw/ DoNotSerialize / ],
     is => 'rw',
 );
 sub BUILD {
@@ -127,26 +129,6 @@ sub _achievements_builder {
     return \@checks;
 }
 
-sub advertise {
-    my $self = shift;
-    my @achievements = @_;
-
-    warn "Congrats! You have unlocked ", scalar( @achievements ), 
-        " new achievement", 's'x(@achievements>1), "\n\n";
-
-    for ( @achievements ) {
-        warn '*' x 60, "\n";
-        warn '*** ', $_->title, "\n";
-        warn '*** ', $_->subtitle, "\n" if $_->subtitle;
-        warn "\n";
-        warn $_->description, "\n";
-        warn "\n", $_->details, "\n" if $_->details;
-    }
-
-    warn '*' x 60, "\n";
-
-}
-
 method initialize_environment {
     my $dir = $self->rc;
 
@@ -157,15 +139,13 @@ method initialize_environment {
 }
 
 sub unlock_achievement {
-    my ( $self, $achievement, $details ) = @_;
+    my ( $self, %info ) = @_;
 
-    $self->add_to_history( 
-        achievement => ref($achievement),
-        timestamp => ''.now(),
-        ( level => $achievement->level ) x ( $achievement->level > 0 ) ,
-        ( details => $details ) x !!$details,
+    $self->log_debug( "achievement unlocked:\n" 
+        . p( %info, colored => 0 )
     );
 
+    $self->add_to_history( %info );
 }
 
 sub add_to_history {
@@ -176,5 +156,17 @@ sub add_to_history {
     print {$fh} Dump \%info;
 }
 
+after unlock_achievement => sub {
+    my( $self, %info ) = @_;
+
+    say 'Congrats! You have unlocked a new achievement!';
+
+    say '*' x 60;
+    say '*** ', $info{achievement};
+    say '*** level ', $info{level} if $info{level};
+    say '';
+    say $info{details} if $info{details};
+    say '*' x 60;
+};
 
 1;

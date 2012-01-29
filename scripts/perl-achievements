@@ -3,6 +3,12 @@
 package
     perlachievements;
 
+use Perl::Achievements;
+
+Perl::Achievements->run;
+
+exit;
+
 
 use strict;
 use warnings;

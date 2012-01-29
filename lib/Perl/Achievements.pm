@@ -4,18 +4,44 @@ package Perl::Achievements;
 use strict;
 use warnings;
 
-use Moose;
-
 no warnings qw/ uninitialized /;
 
+use Moose;
+use MooseX::SemiAffordanceAccessor;
+
 use MooseX::Storage;
+
 use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
   require     => 1;
-  use YAML::Any;
-  use PPI;
+
+use YAML::Any;
+use PPI;
+use File::HomeDir;
+use Path::Class;
+use Method::Signatures;
+
+extends 'MooseX::App::Cmd';
+
+with 'MooseX::ConfigFromFile';
 
 with Storage( format => 'YAML', io => 'File' );
+
+sub get_config_from_file {
+    my ( $class, $file ) = @_;
+
+
+}
+
+has rc => (
+    is => 'ro',
+    isa => 'Str',
+    default => sub {
+        $ENV{PERL_ACHIEVEMENTS_HOME} 
+            || dir( File::HomeDir->my_home, '.perl_achievements' );
+    },
+    lazy => 1,
+);
 
 has _achievements => (
     traits => [ 'Array' ], 
@@ -81,7 +107,7 @@ sub BUILD {
 
 }
 
-sub run {
+sub xrun {
     my ( $self, @args ) = @_;
 
     $self->peruse( @args );
@@ -94,7 +120,7 @@ sub peruse {
 
     my $file = $args[-1];
 
-    $self->ppi( PPI::Document->new( $file ) );
+    $self->set_ppi( PPI::Document->new( $file ) );
 
     my @new_achievements = map { $_->check } $self->achievements;
 
@@ -145,6 +171,15 @@ sub advertise {
 
     warn '*' x 60, "\n";
 
+}
+
+method initialize_environment {
+    my $dir = $self->rc;
+
+    die "'$dir' already exist, aborting" if -e $dir;
+
+    mkdir $dir;
+    mkdir dir( $dir, 'achievements' );
 }
 
 1;

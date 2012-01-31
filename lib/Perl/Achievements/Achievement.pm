@@ -1,9 +1,74 @@
 package Perl::Achievements::Achievement;
+# ABSTRACT: base role for achievements
+
+=head1 SYNOPSIS
+
+    package Perl::Achievements::Achievement::PerlAchiever;
+
+    use strict;
+    use warnings;
+
+    use Moose;
+    use MooseX::SemiAffordanceAccessor;
+
+    with 'Perl::Achievements::Achievement';
+
+    has runs => (
+        traits => [ qw/ Counter Perl::Achievements::Role::ConfigItem / ],
+        isa     => 'Num',
+        is      => 'rw',
+        default => 0,
+        handles => {
+            inc_runs => 'inc',
+        },
+    );
+
+    sub scan {
+        my $self = shift;
+
+        $self->inc_runs;
+
+        return unless $self->runs >= 2** $self->level;
+
+        $self->inc_level;
+
+        $self->unlock( 
+            sprintf "ran perl-achievements against %d scripts/modules",
+                    2 ** ( $self->level - 1 ) 
+        );
+    }
+
+    1;
+
+=head1 DESCRIPTION
+
+Each type of achievement is a module consuming the
+L<Perl::Achievements::Achievement> role.
+
+To be able to preserve counters and states across runs,
+all attributes of the class having the L<Perl::Achievements::Role::ConfigItem>
+trait will be serialized and saved in a yaml file in the 
+C<$PERL_ACHIEVEMENTS_HOME/achievements> directory.
+
+=head1 REQUIRED METHODS
+
+=head2 scan()
+
+C<scan> is the only required method by the role. It is typically invoked
+by the main C<scan()> method of the main L<Perl::Achievements> object,
+and is expected to inspect the current Perl file (available via C<ppi()>)
+and unlock the achievement when the right conditions are met.
+
+=head1 METHODS
+
+=cut
 
 use strict;
 use warnings;
 
 use Moose::Role;
+
+no warnings qw/ uninitialized /;
 
 use MooseX::SemiAffordanceAccessor;
 
@@ -14,11 +79,50 @@ with 'MooseX::ConfigFromFile';
 
 requires qw/ scan /;
 
+=head2  app()
+
+Returns the L<Perl::Achievements> object to which this achievement
+object belongs to.
+
+=head2 ppi()
+
+Returns the L<PPI::Document> object corresponding to the Perl script
+currently under study.
+
+=head2 log( $message )
+
+Logs the I<$message>.
+
+=head2 log_debug( $message )
+
+Debug-level logging.
+
+=cut
+
 has 'app' => (
     required => 1,
     is => 'ro',
     handles => [ qw/ ppi log log_debug / ],
 );
+
+=head2 level()
+
+Returns the current achieved level. A level of I<undef> means that the 
+achievement has not been reached yet, whereas a level of 0 is used for 
+achievements that don't have multiple levels.
+
+=head2 set_level( $level )
+
+Sets the level to I<$level>.
+
+=head2 inc_level( $increment )
+
+Increments the level by the I<$increment>. If the increment
+is not given, increment by 1.
+
+=cut
+
+
 
 has level => (
     traits => [ 'Perl::Achievements::Role::ConfigItem', 'Number' ],
@@ -63,6 +167,16 @@ sub load_or_new {
     return $class->new_with_config( configfile => $file, %args );
 }
 
+=head2 unlock( $details )
+
+Unlocks the achievement. An optional message can be passed, providing
+specific on the deed.
+
+If not set manually beforehand, unlocking the achievement would automatically
+set the level to 0.
+
+=cut
+
 sub unlock {
     my ($self, $details ) = @_;
 
@@ -73,6 +187,12 @@ sub unlock {
         ( details => $details ) x !!$details,
     );
 }
+
+before unlock => sub {
+    my $self = shift;
+
+    $self->set_level(0) unless defined $self->level;
+};
 
 before scan => sub {
     my $self = shift;

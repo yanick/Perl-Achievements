@@ -5,9 +5,9 @@ package Perl::Achievements;
 
     use Perl::Achievements;
 
-    my $judge = Perl::Achievements->new;
+    my $pa = Perl::Achievements->new;
 
-    $judge->scan( $file );
+    $pa->scan( $file );
 
 =head1 DESCRIPTION
 
@@ -43,6 +43,8 @@ use Path::Class;
 use Method::Signatures;
 use DateTime::Functions;
 use Data::Printer;
+use Digest::SHA qw/ sha1_hex /;
+use File::Touch;
 
 extends 'MooseX::App::Cmd';
 
@@ -93,10 +95,19 @@ has ppi => (
 );
 
 method scan ($file) {
-
     $self->set_ppi( PPI::Document->new( $file ) );
 
+    my $digest = sha1_hex($self->ppi->serialize);
+    my $digest_file = $self->rc_file_path( 'scanned', $digest );
+
+    if ( -f $digest_file ) {
+        $self->log_debug( "file '$file' already has been scanned" );
+        return;
+    }
+
     $_->scan for $self->achievements;
+
+    $digest_file->touch;
 }
 
 sub _achievements_builder {
@@ -116,6 +127,7 @@ method initialize_environment {
 
     mkdir $dir;
     mkdir dir( $dir, 'achievements' );
+    mkdir dir( $dir, 'scanned' );
 }
 
 sub unlock_achievement {

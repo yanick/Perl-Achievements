@@ -3,14 +3,15 @@ package Perl::Achievements::Achievement::PerlHacker;
 
 use strict;
 use warnings;
-no warnings qw/ uninitialized /;
 
 use Moose;
+
+no warnings qw/ uninitialized /;
 
 with 'Perl::Achievements::Achievement';
 
 has locs => (
-    traits  => ['Number'],
+    traits => [ qw/ Number Perl::Achievements::Role::ConfigItem / ],
     isa     => 'Num',
     is      => 'rw',
     handles => { add_locs => 'add', },

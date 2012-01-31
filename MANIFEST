@@ -13,8 +13,11 @@ dist.ini
 lib/Perl/Achievements.pm
 lib/Perl/Achievements/Achievement.pm
 lib/Perl/Achievements/Achievement/Cryptomancer.pm
+lib/Perl/Achievements/Achievement/PerlAchiever.pm
 lib/Perl/Achievements/Achievement/PerlHacker.pm
-lib/Perl/Achievements/UnlockedAchievement.pm
-lib/Perl/Achievements/woohoo
-scripts/perl-achievements
+lib/Perl/Achievements/Command.pm
+lib/Perl/Achievements/Command/init.pm
+lib/Perl/Achievements/Command/scan.pm
+lib/Perl/Achievements/Role/ConfigItem.pm
+scripts/perlacheivements
 t/000-report-versions.t

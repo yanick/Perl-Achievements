@@ -1,6 +1,8 @@
 Revision history for Perl::Achievements
 
 {{$NEXT}}
+
+0.0.2     2012-01-30
     * unleashed to CPAN, due to severe peer pressure. 
         (aka brian d foy made me do it)
 

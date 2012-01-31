@@ -1,24 +1,65 @@
 package Perl::Achievements;
 BEGIN {
-  $Perl::Achievements::VERSION = '0.0.1';
+  $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
-# ABSTRACT: whoever die() with the most badges win
+{
+  $Perl::Achievements::VERSION = '0.0.2';
+}
+# ABSTRACT: whoever die()s with the most badges win
+
+
+use 5.10.0;
 
 use strict;
 use warnings;
 
-use Moose;
-
 no warnings qw/ uninitialized /;
 
-use MooseX::Storage;
+use Moose;
+use MooseX::SemiAffordanceAccessor;
+
 use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
   require     => 1;
-  use YAML::Any;
-  use PPI;
 
-with Storage( format => 'YAML', io => 'File' );
+use YAML::Any;
+use PPI;
+use File::HomeDir;
+use Path::Class;
+use Method::Signatures;
+use DateTime::Functions;
+use Data::Printer;
+use Digest::SHA qw/ sha1_hex /;
+use File::Touch;
+
+extends 'MooseX::App::Cmd';
+
+with qw/ 
+    MooseX::Role::Loggable
+/;
+
+sub get_config_from_file {
+    my ( $class, $file ) = @_;
+
+    # TODO
+}
+
+has rc => (
+    is => 'ro',
+    isa => 'Str',
+    default => sub {
+        $ENV{PERL_ACHIEVEMENTS_HOME} 
+            || dir( File::HomeDir->my_home, '.perl_achievements' );
+    },
+    lazy => 1,
+);
+
+sub rc_file_path {
+    my ( $self, @path ) = @_;
+
+    return file( $self->rc, @path );
+}
+
 
 has _achievements => (
     traits => [ 'Array' ], 
@@ -30,94 +71,29 @@ has _achievements => (
     },
 );
 
-has _new_achievements => (
-    traits => [ 'Array' ], 
-    is      => 'rw',
-    default => sub { [] },
-    handles => {
-        new_achievements => 'elements',
-        add_new_achievement => 'push',
-    },
-);
-
-has _unlocked_achievements => (
-    traits => [ 'Array' ],
-    default => sub{ [] },
-    is => 'ro',
-    handles => {
-        unlocked_achievements => 'elements',
-        add_unlocked_achievements => 'push',
-    },
-);
-
 has rc => (
     is => 'ro',
     default => sub { $ENV{HOME} . '/.perl-achievements' },
 );
 
 has ppi => (
-    traits => [ qw/ DoNotSerialize / ],
     is => 'rw',
 );
 
-sub BUILD {
-    my $self = shift;
+method scan ($file) {
+    $self->set_ppi( PPI::Document->new( $file ) );
 
-    return unless -f $self->rc;
+    my $digest = sha1_hex($self->ppi->serialize);
+    my $digest_file = $self->rc_file_path( 'scanned', $digest );
 
-    my $ref = YAML::Any::LoadFile( $self->rc );
-
-    for ( @{ $ref->{_unlocked_achievements} } ) {
-        $self->add_unlocked_achievements(
-            Perl::Achievements::UnlockedAchievement->new( %$_ ) );
+    if ( -f $digest_file ) {
+        $self->log_debug( "file '$file' already has been scanned" );
+        return;
     }
 
-    for my $achievement ( @{ $ref->{_achievements} } ) {
-        my ( $ach ) = grep { ref($_) eq $achievement->{'__CLASS__'} } $self->achievements
-            or next;
-        while( my( $k, $v ) = each %$achievement ) {
-            next if $k eq '__CLASS__';
-            $ach->$k( $v );
-        }
-    }
+    $_->scan for $self->achievements;
 
-
-}
-
-sub run {
-    my ( $self, @args ) = @_;
-
-    $self->peruse( @args );
-
-    exec 'perl', @args;
-}
-
-sub peruse {
-    my ( $self, @args ) = @_;
-
-    my $file = $args[-1];
-
-    $self->ppi( PPI::Document->new( $file ) );
-
-    my @new_achievements = map { $_->check } $self->achievements;
-
-    if ( my @new_achievements = $self->new_achievements ) {
-        $self->advertise( @new_achievements );
-        $self->add_unlocked_achievements( @new_achievements );
-    }
-
-    $self->store( $self->rc );
-}
-
-sub list_achievements {
-    my $self = shift;
-
-    for ( $self->unlocked_achievements ) {
-        print join " - ", $_->timestamp->date, $_->title;
-        print " - ", $_->subtitle if $_->subtitle;
-        print "\n";
-    }
-
+    $digest_file->touch;
 }
 
 sub _achievements_builder {
@@ -125,30 +101,51 @@ sub _achievements_builder {
 
     my @checks;
 
-    push @checks, $_->new( app => $self ) for $self->plugins;
+    push @checks, $_->load_or_new( app => $self ) for $self->plugins;
 
     return \@checks;
 }
 
-sub advertise {
-    my $self = shift;
-    my @achievements = @_;
+method initialize_environment {
+    my $dir = $self->rc;
 
-    warn "Congrats! You have unlocked ", scalar( @achievements ), 
-        " new achievement", 's'x(@achievements>1), "\n\n";
+    die "'$dir' already exist, aborting" if -e $dir;
 
-    for ( @achievements ) {
-        warn '*' x 60, "\n";
-        warn '*** ', $_->title, "\n";
-        warn '*** ', $_->subtitle, "\n" if $_->subtitle;
-        warn "\n";
-        warn $_->description, "\n";
-        warn "\n", $_->details, "\n" if $_->details;
-    }
-
-    warn '*' x 60, "\n";
-
+    mkdir $dir;
+    mkdir dir( $dir, 'achievements' );
+    mkdir dir( $dir, 'scanned' );
 }
+
+sub unlock_achievement {
+    my ( $self, %info ) = @_;
+
+    $self->log_debug( "achievement unlocked:\n" 
+        . p( %info, colored => 0 )
+    );
+
+    $self->add_to_history( %info );
+}
+
+sub add_to_history {
+    my $self = shift;
+    my %info = @_;
+    my $file = $self->rc_file_path( 'history' );
+    open my $fh, '>>', $file;
+    print {$fh} Dump \%info;
+}
+
+after unlock_achievement => sub {
+    my( $self, %info ) = @_;
+
+    say 'Congrats! You have unlocked a new achievement!';
+
+    say '*' x 60;
+    say '*** ', $info{achievement};
+    say '*** level ', $info{level} if $info{level};
+    say '';
+    say $info{details} if $info{details};
+    say '*' x 60;
+};
 
 1;
 
@@ -157,19 +154,38 @@ __END__
 
 =head1 NAME
 
-Perl::Achievements - whoever die() with the most badges win
+Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.0.1
+version 0.0.2
+
+=head1 DESCRIPTION
+
+If you want to use C<perl-achievement>, look 
+at L<perlachievements>.
+
+If you want to implement a new achievement,
+look at L<Perl::Achievements::Achievement>.
+
+WARNING: C<Perl::Achievements> is young, rough,
+and subject to change. You've been warned.
+
+=head1 SYNOPSIs
+
+    use Perl::Achievements;
+
+    my $pa = Perl::Achievements->new;
+
+    $pa->scan( $file );
 
 =head1 AUTHOR
 
-  Yanick Champoux <yanick@cpan.org>
+Yanick Champoux <yanick@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Yanick Champoux.
+This software is copyright (c) 2012 by Yanick Champoux.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

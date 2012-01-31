@@ -1,12 +1,17 @@
 package Perl::Achievements::Achievement::Cryptomancer;
 BEGIN {
-  $Perl::Achievements::Achievement::Cryptomancer::VERSION = '0.0.1';
+  $Perl::Achievements::Achievement::Cryptomancer::AUTHORITY = 'cpan:YANICK';
 }
+{
+  $Perl::Achievements::Achievement::Cryptomancer::VERSION = '0.0.2';
+}
+# ABSTRACT: uses Perl magic variables
 
 use strict;
 use warnings;
 
 use Moose;
+use MooseX::SemiAffordanceAccessor;
 
 no warnings qw/ uninitialized /;
 
@@ -14,39 +19,32 @@ use List::MoreUtils qw/ uniq any/;
 
 with 'Perl::Achievements::Achievement';
 
-sub description { 'Used Perl magic variables.' };
-
 has variables => (
+    traits => [ qw/ Perl::Achievements::Role::ConfigItem / ],
     is => 'rw',
     default => sub { [] },
 );
 
-sub subtitle {
-    my @vars = @{$_[0]->variables};
-    return "Level " . @vars;
-}
-
-sub details {
-    "Variables used: " . join ', ', @{$_[0]->variables};
-}
-
-sub check {
+sub scan {
     my $self = shift;
 
-    my $magic = $self->app->ppi->find( 'PPI::Token::Magic' ) or return;
+    my $magic = $self->ppi->find( 'PPI::Token::Magic' ) or return;
 
     my @vars = @{ $self->variables };
 
     my @new_vars = uniq @vars, map { $_->content } @$magic;
 
-    return if @vars == @new_vars;
+    return if $self->level == @new_vars;
 
-    $self->variables( \@new_vars );
+    $self->set_level( scalar @new_vars );
 
-    $self->unlock_achievement;
+    $self->set_variables( \@new_vars );
+
+    my %vars = map { $_ => 1 } @vars;
+    @new_vars = sort grep { !$vars{$_} } @new_vars;
+
+    $self->unlock( "new magic variables used: ". join ', ', @new_vars );
 }
-
-
 
 1;
 
@@ -58,19 +56,19 @@ __END__
 
 =head1 NAME
 
-Perl::Achievements::Achievement::Cryptomancer
+Perl::Achievements::Achievement::Cryptomancer - uses Perl magic variables
 
 =head1 VERSION
 
-version 0.0.1
+version 0.0.2
 
 =head1 AUTHOR
 
-  Yanick Champoux <yanick@cpan.org>
+Yanick Champoux <yanick@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Yanick Champoux.
+This software is copyright (c) 2012 by Yanick Champoux.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

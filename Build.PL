@@ -20,7 +20,7 @@ my %module_build_args = (
     "Yanick Champoux <yanick\@cpan.org>"
   ],
   "dist_name" => "Perl-Achievements",
-  "dist_version" => "0.0.2",
+  "dist_version" => "0.1.0",
   "license" => "perl",
   "module_name" => "Perl::Achievements",
   "recommends" => {},

@@ -1,11 +1,11 @@
-package Perl::Achievements::Achievement::PerlAchiever;
+package Perl::Achievements::Achievement::WeekendWarrior;
 BEGIN {
-  $Perl::Achievements::Achievement::PerlAchiever::AUTHORITY = 'cpan:YANICK';
+  $Perl::Achievements::Achievement::WeekendWarrior::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::PerlAchiever::VERSION = '0.1.0';
+  $Perl::Achievements::Achievement::WeekendWarrior::VERSION = '0.1.0';
 }
-# ABSTRACT: feeds code to perl-achiever
+# ABSTRACT: code over the week-end
 
 use strict;
 use warnings;
@@ -17,27 +17,30 @@ no warnings qw/ uninitialized /;
 
 with 'Perl::Achievements::Achievement';
 
-has runs => (
+has days => (
     traits => [ qw/ Counter Perl::Achievements::Role::ConfigItem / ],
     isa     => 'Num',
     is      => 'rw',
     default => 0,
     handles => {
-        inc_runs => 'inc',
+        inc_days => 'inc',
     },
 );
 
 sub scan {
     my $self = shift;
 
-    $self->inc_runs;
+    my $wday = (localtime)[6];
 
-    return unless $self->runs >= 2** $self->level;
+    return unless $wday == 0 or $wday == 6;
+
+    $self->inc_days;
+
+    return unless $self->days >= 2**$self->level; 
 
     $self->inc_level;
     $self->unlock( 
-        sprintf "ran perl-achievements against %d scripts/modules",
-                2 ** ( $self->level - 1 ) 
+        sprintf "Was at the computer %d days during week-ends", $self->days
     );
 }
 
@@ -48,7 +51,7 @@ __END__
 
 =head1 NAME
 
-Perl::Achievements::Achievement::PerlAchiever - feeds code to perl-achiever
+Perl::Achievements::Achievement::WeekendWarrior - code over the week-end
 
 =head1 VERSION
 

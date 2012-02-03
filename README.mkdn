@@ -4,7 +4,15 @@ Perl::Achievements - whoever die()s with the most badges win
 
 # VERSION
 
-version 0.0.2
+version 0.1.0
+
+# SYNOPSIS
+
+    use Perl::Achievements;
+
+    my $pa = Perl::Achievements->new;
+
+    $pa->scan( $file );
 
 # DESCRIPTION
 
@@ -16,14 +24,6 @@ look at [Perl::Achievements::Achievement](http://search.cpan.org/perldoc?Perl::A
 
 WARNING: `Perl::Achievements` is young, rough,
 and subject to change. You've been warned.
-
-# SYNOPSIs
-
-    use Perl::Achievements;
-
-    my $pa = Perl::Achievements->new;
-
-    $pa->scan( $file );
 
 # AUTHOR
 

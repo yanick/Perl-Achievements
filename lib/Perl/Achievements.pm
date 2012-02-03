@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::VERSION = '0.0.2';
+  $Perl::Achievements::VERSION = '0.1.0';
 }
 # ABSTRACT: whoever die()s with the most badges win
 
@@ -158,7 +158,15 @@ Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.0.2
+version 0.1.0
+
+=head1 SYNOPSIS
+
+    use Perl::Achievements;
+
+    my $pa = Perl::Achievements->new;
+
+    $pa->scan( $file );
 
 =head1 DESCRIPTION
 
@@ -170,14 +178,6 @@ look at L<Perl::Achievements::Achievement>.
 
 WARNING: C<Perl::Achievements> is young, rough,
 and subject to change. You've been warned.
-
-=head1 SYNOPSIs
-
-    use Perl::Achievements;
-
-    my $pa = Perl::Achievements->new;
-
-    $pa->scan( $file );
 
 =head1 AUTHOR
 

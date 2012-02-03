@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::Cryptomancer::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::Cryptomancer::VERSION = '0.0.2';
+  $Perl::Achievements::Achievement::Cryptomancer::VERSION = '0.1.0';
 }
 # ABSTRACT: uses Perl magic variables
 
@@ -60,7 +60,7 @@ Perl::Achievements::Achievement::Cryptomancer - uses Perl magic variables
 
 =head1 VERSION
 
-version 0.0.2
+version 0.1.0
 
 =head1 AUTHOR
 

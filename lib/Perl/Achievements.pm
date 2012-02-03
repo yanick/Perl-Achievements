@@ -1,7 +1,7 @@
 package Perl::Achievements;
 # ABSTRACT: whoever die()s with the most badges win
 
-=head1 SYNOPSIs
+=head1 SYNOPSIS
 
     use Perl::Achievements;
 

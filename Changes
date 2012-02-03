@@ -1,6 +1,8 @@
 Revision history for Perl::Achievements
 
 {{$NEXT}}
+
+0.1.0     2012-02-02
  [ENHANCEMENTS]
  - add WeekendWarrior achievement
 

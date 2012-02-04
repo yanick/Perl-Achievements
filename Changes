@@ -1,11 +1,16 @@
 Revision history for Perl::Achievements
 
 {{$NEXT}}
+ [API CHANGES]
 
-0.1.0     2012-02-02
+ [BUG FIXES]
+
+ [ENHANCEMENTS]
+ - new 'report' command
+
+0.1.0 2012-02-02
  [ENHANCEMENTS]
  - add WeekendWarrior achievement
-
 
 0.0.2 2012-01-30
  - unleashed to CPAN, due to severe peer pressure.  (aka brian d foy made

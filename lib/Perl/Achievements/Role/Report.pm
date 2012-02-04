@@ -13,4 +13,9 @@ has who => (
     required => 1,
 );
 
+has history => (
+    is => 'ro',
+    required => 1,
+);
+
 1;

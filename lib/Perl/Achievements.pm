@@ -39,7 +39,7 @@ use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
   require     => 1;
 
-use YAML::Any qw/ LoadFile Dump /;
+use YAML::Any qw/ LoadFile Load Dump /;
 use PPI;
 use File::HomeDir;
 use Path::Class qw/ file dir /;
@@ -111,6 +111,17 @@ has _achievements => (
 
 has ppi => (
     is => 'rw',
+);
+
+# will change
+has history => (
+    is => 'ro',
+    default => sub {
+        my $file = $_[0]->rc_file_path( 'history' );
+        return [] unless -f $file;
+
+        return [ map { Load( $_ ) } split /^---\n/, scalar $file->slurp ];
+    },
 );
 
 method scan ($file) {
@@ -188,6 +199,7 @@ method generate_report( $format ) {
 
     my $report = $class->new(
         who => $self->user->name,
+        history => $self->history,
     );
 
     return $report->generate;

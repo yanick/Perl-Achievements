@@ -31,15 +31,18 @@ no warnings qw/ uninitialized /;
 
 use Moose;
 use MooseX::SemiAffordanceAccessor;
+use MooseX::ClassAttribute;
+
+use Perl::Achievements::User;
 
 use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
   require     => 1;
 
-use YAML::Any;
+use YAML::Any qw/ LoadFile Dump /;
 use PPI;
 use File::HomeDir;
-use Path::Class;
+use Path::Class qw/ file dir /;
 use Method::Signatures;
 use DateTime::Functions;
 use Data::Printer;
@@ -50,20 +53,41 @@ extends 'MooseX::App::Cmd';
 
 with qw/ 
     MooseX::Role::Loggable
+    MooseX::ConfigFromFile
 /;
+
+with 'MooseX::Role::BuildInstanceOf' => {
+    target => 'Perl::Achievements::User',
+    prefix => 'user',
+};
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;
 
-    # TODO
+    my $config = LoadFile( $file );
+
+    # massage the config a wee bit
+    $_ = [ %$_ ] for 
+        $config->{user_args} = delete $config->{user};
+
+    return $config;
 }
 
-has rc => (
+my $configfile = ''.file(
+    $ENV{PERL_ACHIEVEMENTS_HOME} 
+        || dir( File::HomeDir->my_home, '.perl-achievements' ),
+    'config'
+);
+
+has '+configfile' => (
+    default => $configfile,
+);
+
+class_has rc => (
     is => 'ro',
-    isa => 'Str',
     default => sub {
         $ENV{PERL_ACHIEVEMENTS_HOME} 
-            || dir( File::HomeDir->my_home, '.perl_achievements' );
+            || dir( File::HomeDir->my_home, '.perl-achievements' );
     },
     lazy => 1,
 );
@@ -83,11 +107,6 @@ has _achievements => (
         achievements => 'elements',
         add_achievements => 'push',
     },
-);
-
-has rc => (
-    is => 'ro',
-    default => sub { $ENV{HOME} . '/.perl-achievements' },
 );
 
 has ppi => (
@@ -160,5 +179,18 @@ after unlock_achievement => sub {
     say $info{details} if $info{details};
     say '*' x 60;
 };
+
+method generate_report( $format ) {
+    my $class = 'Perl::Achievements::Report::'. ucfirst $format;
+
+    eval "use $class; 1" 
+        or die "could not use format '$format': $@\n";
+
+    my $report = $class->new(
+        who => $self->user->name,
+    );
+
+    return $report->generate;
+}
 
 1;

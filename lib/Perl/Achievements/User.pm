@@ -1,28 +1,34 @@
-package Perl::Achievements::Role::ConfigItem;
+package Perl::Achievements::User;
 BEGIN {
-  $Perl::Achievements::Role::ConfigItem::AUTHORITY = 'cpan:YANICK';
+  $Perl::Achievements::User::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Role::ConfigItem::VERSION = '0.2.0';
+  $Perl::Achievements::User::VERSION = '0.2.0';
 }
 
 use strict;
 use warnings;
 
-use Moose::Role;
+use Moose;
 
+has name => (
+    is => 'ro',
+    isa => 'Str',
+);
+
+has url => (
+    is => 'ro',
+    isa => 'Str',
+);
 
 1;
-
-
-
 
 __END__
 =pod
 
 =head1 NAME
 
-Perl::Achievements::Role::ConfigItem
+Perl::Achievements::User
 
 =head1 VERSION
 

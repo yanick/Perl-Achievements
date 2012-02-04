@@ -9,6 +9,7 @@ META.yml
 README
 README.mkdn
 SIGNATURE
+bin/perlachievements
 dist.ini
 lib/Perl/Achievements.pm
 lib/Perl/Achievements/Achievement.pm
@@ -18,7 +19,10 @@ lib/Perl/Achievements/Achievement/PerlHacker.pm
 lib/Perl/Achievements/Achievement/WeekendWarrior.pm
 lib/Perl/Achievements/Command.pm
 lib/Perl/Achievements/Command/init.pm
+lib/Perl/Achievements/Command/report.pm
 lib/Perl/Achievements/Command/scan.pm
+lib/Perl/Achievements/Report/Html.pm
 lib/Perl/Achievements/Role/ConfigItem.pm
-scripts/perlacheivements
+lib/Perl/Achievements/Role/Report.pm
+lib/Perl/Achievements/User.pm
 t/000-report-versions.t

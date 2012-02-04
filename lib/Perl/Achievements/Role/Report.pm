@@ -1,9 +1,9 @@
-package Perl::Achievements::Role::ConfigItem;
+package Perl::Achievements::Role::Report;
 BEGIN {
-  $Perl::Achievements::Role::ConfigItem::AUTHORITY = 'cpan:YANICK';
+  $Perl::Achievements::Role::Report::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Role::ConfigItem::VERSION = '0.2.0';
+  $Perl::Achievements::Role::Report::VERSION = '0.2.0';
 }
 
 use strict;
@@ -11,18 +11,27 @@ use warnings;
 
 use Moose::Role;
 
+requires qw/ generate /;
+
+has who => (
+    is => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has history => (
+    is => 'ro',
+    required => 1,
+);
 
 1;
-
-
-
 
 __END__
 =pod
 
 =head1 NAME
 
-Perl::Achievements::Role::ConfigItem
+Perl::Achievements::Role::Report
 
 =head1 VERSION
 

@@ -1,17 +1,17 @@
-package Perl::Achievements::Command::scan;
+package Perl::Achievements::Command::report;
 BEGIN {
-  $Perl::Achievements::Command::scan::AUTHORITY = 'cpan:YANICK';
+  $Perl::Achievements::Command::report::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::scan::VERSION = '0.2.0';
+  $Perl::Achievements::Command::report::VERSION = '0.2.0';
 }
-# ABSTRACT: inspects scripts/modules for achievements
+# ABSTRACT: generates a report of one's achievements
 
 use 5.10.0;
 
-
 use strict;
 use warnings;
+
 
 use Moose;
 
@@ -20,10 +20,7 @@ extends 'Perl::Achievements::Command';
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
-    for ( @$args ) {
-        $self->log_debug( "scanning '$_'..." );
-        $self->scan( $_ );
-    }
+    print $self->generate_report( 'html' );
 }
 
 1;
@@ -33,7 +30,7 @@ __END__
 
 =head1 NAME
 
-Perl::Achievements::Command::scan - inspects scripts/modules for achievements
+Perl::Achievements::Command::report - generates a report of one's achievements
 
 =head1 VERSION
 
@@ -41,11 +38,12 @@ version 0.2.0
 
 =head1 SYNOPSIS
 
-    perl-achievement scan <files...>
+    perl-achievements report
 
 =head1 DESCRIPTION
 
-Inspects the given files for achievements.
+Produces a report of the glorious achievements of the user.
+Currently the report is printed on STDOUT, and is in HTML.
 
 =head1 AUTHOR
 

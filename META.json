@@ -38,11 +38,16 @@
             "Moose::Role" : 0,
             "MooseX::App::Cmd" : 0,
             "MooseX::App::Cmd::Command" : 0,
+            "MooseX::ClassAttribute" : 0,
             "MooseX::ConfigFromFile" : 0,
+            "MooseX::Role::BuildInstanceOf" : 0,
             "MooseX::Role::Loggable" : 0,
             "MooseX::SemiAffordanceAccessor" : 0,
             "PPI" : 0,
             "Path::Class" : 0,
+            "Template::Caribou" : 0,
+            "Template::Caribou::Tags::HTML" : 0,
+            "Template::Caribou::Utils" : 0,
             "YAML::Any" : 0,
             "perl" : "v5.10.0",
             "strict" : 0,
@@ -60,43 +65,59 @@
    "provides" : {
       "Perl::Achievements" : {
          "file" : "lib/Perl/Achievements.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Achievement" : {
          "file" : "lib/Perl/Achievements/Achievement.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Achievement::Cryptomancer" : {
          "file" : "lib/Perl/Achievements/Achievement/Cryptomancer.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Achievement::PerlAchiever" : {
          "file" : "lib/Perl/Achievements/Achievement/PerlAchiever.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Achievement::PerlHacker" : {
          "file" : "lib/Perl/Achievements/Achievement/PerlHacker.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Achievement::WeekendWarrior" : {
          "file" : "lib/Perl/Achievements/Achievement/WeekendWarrior.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Command" : {
          "file" : "lib/Perl/Achievements/Command.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Command::init" : {
          "file" : "lib/Perl/Achievements/Command/init.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
+      },
+      "Perl::Achievements::Command::report" : {
+         "file" : "lib/Perl/Achievements/Command/report.pm",
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Command::scan" : {
          "file" : "lib/Perl/Achievements/Command/scan.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
+      },
+      "Perl::Achievements::Report::Html" : {
+         "file" : "lib/Perl/Achievements/Report/Html.pm",
+         "version" : "v0.2.0"
       },
       "Perl::Achievements::Role::ConfigItem" : {
          "file" : "lib/Perl/Achievements/Role/ConfigItem.pm",
-         "version" : "v0.1.0"
+         "version" : "v0.2.0"
+      },
+      "Perl::Achievements::Role::Report" : {
+         "file" : "lib/Perl/Achievements/Role/Report.pm",
+         "version" : "v0.2.0"
+      },
+      "Perl::Achievements::User" : {
+         "file" : "lib/Perl/Achievements/User.pm",
+         "version" : "v0.2.0"
       }
    },
    "release_status" : "stable",
@@ -112,7 +133,7 @@
          "web" : "https://github.com/yanick/Perl-Achievements"
       }
    },
-   "version" : "0.1.0",
+   "version" : "0.2.0",
    "x_authority" : "cpan:YANICK"
 }
 

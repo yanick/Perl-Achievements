@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::VERSION = '0.1.0';
+  $Perl::Achievements::VERSION = '0.2.0';
 }
 # ABSTRACT: whoever die()s with the most badges win
 
@@ -17,15 +17,18 @@ no warnings qw/ uninitialized /;
 
 use Moose;
 use MooseX::SemiAffordanceAccessor;
+use MooseX::ClassAttribute;
+
+use Perl::Achievements::User;
 
 use Module::Pluggable
   search_path => ['Perl::Achievements::Achievement'],
   require     => 1;
 
-use YAML::Any;
+use YAML::Any qw/ LoadFile Load Dump /;
 use PPI;
 use File::HomeDir;
-use Path::Class;
+use Path::Class qw/ file dir /;
 use Method::Signatures;
 use DateTime::Functions;
 use Data::Printer;
@@ -36,20 +39,41 @@ extends 'MooseX::App::Cmd';
 
 with qw/ 
     MooseX::Role::Loggable
+    MooseX::ConfigFromFile
 /;
+
+with 'MooseX::Role::BuildInstanceOf' => {
+    target => 'Perl::Achievements::User',
+    prefix => 'user',
+};
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;
 
-    # TODO
+    my $config = LoadFile( $file );
+
+    # massage the config a wee bit
+    $_ = [ %$_ ] for 
+        $config->{user_args} = delete $config->{user};
+
+    return $config;
 }
 
-has rc => (
+my $configfile = ''.file(
+    $ENV{PERL_ACHIEVEMENTS_HOME} 
+        || dir( File::HomeDir->my_home, '.perl-achievements' ),
+    'config'
+);
+
+has '+configfile' => (
+    default => $configfile,
+);
+
+class_has rc => (
     is => 'ro',
-    isa => 'Str',
     default => sub {
         $ENV{PERL_ACHIEVEMENTS_HOME} 
-            || dir( File::HomeDir->my_home, '.perl_achievements' );
+            || dir( File::HomeDir->my_home, '.perl-achievements' );
     },
     lazy => 1,
 );
@@ -71,13 +95,19 @@ has _achievements => (
     },
 );
 
-has rc => (
-    is => 'ro',
-    default => sub { $ENV{HOME} . '/.perl-achievements' },
-);
-
 has ppi => (
     is => 'rw',
+);
+
+# will change
+has history => (
+    is => 'ro',
+    default => sub {
+        my $file = $_[0]->rc_file_path( 'history' );
+        return [] unless -f $file;
+
+        return [ map { Load( $_ ) } split /^---\n/, scalar $file->slurp ];
+    },
 );
 
 method scan ($file) {
@@ -147,6 +177,20 @@ after unlock_achievement => sub {
     say '*' x 60;
 };
 
+method generate_report( $format ) {
+    my $class = 'Perl::Achievements::Report::'. ucfirst $format;
+
+    eval "use $class; 1" 
+        or die "could not use format '$format': $@\n";
+
+    my $report = $class->new(
+        who => $self->user->name,
+        history => $self->history,
+    );
+
+    return $report->generate;
+}
+
 1;
 
 __END__
@@ -158,7 +202,7 @@ Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.1.0
+version 0.2.0
 
 =head1 SYNOPSIS
 

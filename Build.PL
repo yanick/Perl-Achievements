@@ -20,7 +20,7 @@ my %module_build_args = (
     "Yanick Champoux <yanick\@cpan.org>"
   ],
   "dist_name" => "Perl-Achievements",
-  "dist_version" => "0.1.0",
+  "dist_version" => "0.2.0",
   "license" => "perl",
   "module_name" => "Perl::Achievements",
   "recommends" => {},
@@ -38,17 +38,24 @@ my %module_build_args = (
     "Moose::Role" => 0,
     "MooseX::App::Cmd" => 0,
     "MooseX::App::Cmd::Command" => 0,
+    "MooseX::ClassAttribute" => 0,
     "MooseX::ConfigFromFile" => 0,
+    "MooseX::Role::BuildInstanceOf" => 0,
     "MooseX::Role::Loggable" => 0,
     "MooseX::SemiAffordanceAccessor" => 0,
     "PPI" => 0,
     "Path::Class" => 0,
+    "Template::Caribou" => 0,
+    "Template::Caribou::Tags::HTML" => 0,
+    "Template::Caribou::Utils" => 0,
     "YAML::Any" => 0,
     "perl" => "5.10.0",
     "strict" => 0,
     "warnings" => 0
   },
-  "script_files" => []
+  "script_files" => [
+    "bin/perlachievements"
+  ]
 );
 
 

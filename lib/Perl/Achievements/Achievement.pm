@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::VERSION = '0.2.0';
+  $Perl::Achievements::Achievement::VERSION = '0.2.1';
 }
 # ABSTRACT: base role for achievements
 
@@ -35,7 +35,7 @@ has 'app' => (
 
 
 has level => (
-    traits => [ 'Perl::Achievements::Role::ConfigItem', 'Number' ],
+    traits => [ 'Perl::Achievements::Role::ConfigItem' ],
     isa => 'Num|Undef',
     is => 'rw',
     default => undef,
@@ -143,7 +143,7 @@ Perl::Achievements::Achievement - base role for achievements
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 SYNOPSIS
 

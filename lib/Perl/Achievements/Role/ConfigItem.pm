@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Role::ConfigItem::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Role::ConfigItem::VERSION = '0.2.0';
+  $Perl::Achievements::Role::ConfigItem::VERSION = '0.2.1';
 }
 
 use strict;
@@ -26,7 +26,7 @@ Perl::Achievements::Role::ConfigItem
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 AUTHOR
 

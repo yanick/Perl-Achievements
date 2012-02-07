@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::VERSION = '0.2.0';
+  $Perl::Achievements::VERSION = '0.2.1';
 }
 # ABSTRACT: whoever die()s with the most badges win
 
@@ -202,7 +202,7 @@ Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 SYNOPSIS
 

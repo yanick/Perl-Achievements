@@ -1,5 +1,9 @@
 Revision history for Perl::Achievements
 
+0.2.1 2012-02-06
+ [BUG FIXES]
+ - Newer Moose wasn't agreeing with 'Num|Undef' and Number trait
+
 0.2.0 2012-02-04
  [ENHANCEMENTS]
  - new 'report' command
@@ -9,9 +13,11 @@ Revision history for Perl::Achievements
  - add WeekendWarrior achievement
 
 0.0.2 2012-01-30
+ [GENERAL]
  - unleashed to CPAN, due to severe peer pressure.  (aka brian d foy made
    me do it)
 
 0.0.1 2010-08-20T09:45:12Z
+ [GENERAL]
  - Birth of a strange new baby.
 

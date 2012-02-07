@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::WeekendWarrior::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::WeekendWarrior::VERSION = '0.2.0';
+  $Perl::Achievements::Achievement::WeekendWarrior::VERSION = '0.2.1';
 }
 # ABSTRACT: code over the week-end
 
@@ -55,7 +55,7 @@ Perl::Achievements::Achievement::WeekendWarrior - code over the week-end
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 AUTHOR
 

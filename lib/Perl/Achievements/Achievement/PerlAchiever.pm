@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::PerlAchiever::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::PerlAchiever::VERSION = '0.2.0';
+  $Perl::Achievements::Achievement::PerlAchiever::VERSION = '0.2.1';
 }
 # ABSTRACT: feeds code to perl-achiever
 
@@ -52,7 +52,7 @@ Perl::Achievements::Achievement::PerlAchiever - feeds code to perl-achiever
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 AUTHOR
 

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::VERSION = '0.2.0';
+  $Perl::Achievements::Command::VERSION = '0.2.1';
 }
 
 use strict;
@@ -50,7 +50,7 @@ Perl::Achievements::Command
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 AUTHOR
 

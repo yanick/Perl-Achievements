@@ -125,7 +125,7 @@ is not given, increment by 1.
 
 
 has level => (
-    traits => [ 'Perl::Achievements::Role::ConfigItem', 'Number' ],
+    traits => [ 'Perl::Achievements::Role::ConfigItem' ],
     isa => 'Num|Undef',
     is => 'rw',
     default => undef,

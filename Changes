@@ -6,9 +6,13 @@ Revision history for Perl::Achievements
  [API CHANGES]
 
  [BUG FIXES]
- - Newer Moose wasn't agreeing with 'Num|Undef' and Number trait
+ - Create and populate the config file.
 
  [ENHANCEMENTS]
+
+0.2.1 2012-02-06
+ [BUG FIXES]
+ - Newer Moose wasn't agreeing with 'Num|Undef' and Number trait
 
 0.2.0 2012-02-04
  [ENHANCEMENTS]

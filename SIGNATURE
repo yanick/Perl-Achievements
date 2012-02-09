@@ -14,37 +14,37 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 9ca179ad5c2e486aefa700fd1322d516370b527c Build.PL
-SHA1 592f74760cd668fa9a0b241e4bc28ee749b575b4 Changes
+SHA1 181f57581c61ecf1c31b43d98edc4b3cdb72ef1a Build.PL
+SHA1 054aaddd52180c11f9095cdf9a166d4396543d6b Changes
 SHA1 dca45f1350694a55d494910375d4c0f5b81a70b4 INSTALL
 SHA1 33260abc93b43a44581b0b6263d7e4318f4122bb LICENSE
 SHA1 8d2e6a807c6813be04397f60d7838341284f0408 MANIFEST
 SHA1 ddcedab094c480d0920667d2353c7265153fbf51 MANIFEST.SKIP
-SHA1 98f5333f0c6580dc2fabfa89914cb996d9cd22c1 META.json
-SHA1 219e9000e7ed8123d3f176cdf5778d0d3972b9f8 META.yml
-SHA1 61462152d2ad3f4147345d874fd2436d3e066b62 README
-SHA1 dd70dd2eddcf7e484ad08c1535bba9d4f173c991 README.mkdn
-SHA1 f56eff8fb66d1089baf43ee32b8017b0f2470725 bin/perlachievements
+SHA1 07ebe3c1d3d05e283566cc54705738ec8a979f8d META.json
+SHA1 14fa2671f48b5187bfc3070eb2fa7291235eda12 META.yml
+SHA1 826c526a3a933c61ba48a27ea21352dffdac8564 README
+SHA1 7a88ce0d3087eb1e7e3cfffa8ff930cd0558d45b README.mkdn
+SHA1 5797cf16d55530b038c03921298f70caa19c935e bin/perlachievements
 SHA1 8a35b2e8becdde50fdd49dab0614cc22023fd257 dist.ini
-SHA1 e8ca15ab582d16898560bb8986f06af34e780405 lib/Perl/Achievements.pm
-SHA1 4c73c7b366d70f1bfc33cd2d8895c1dd2ff81d25 lib/Perl/Achievements/Achievement.pm
-SHA1 60998b038a50278b43039a75ffc13ce514655644 lib/Perl/Achievements/Achievement/Cryptomancer.pm
-SHA1 ab1d1c0f18e1d726aa193e70db76447d882da4ae lib/Perl/Achievements/Achievement/PerlAchiever.pm
-SHA1 72f265b7d7ecc9bd8969ee9915269c716426367e lib/Perl/Achievements/Achievement/PerlHacker.pm
-SHA1 7b157942cac30c574dc3bcc94c3fa2cb93f0b618 lib/Perl/Achievements/Achievement/WeekendWarrior.pm
-SHA1 fa0d42306755568efadc9440809ed9e52a4337c3 lib/Perl/Achievements/Command.pm
-SHA1 ffe45f1131ad2568b0f7d70d36fa7e7e735e035f lib/Perl/Achievements/Command/init.pm
-SHA1 810109830130a28e88317281a64fb28b5a15236e lib/Perl/Achievements/Command/report.pm
-SHA1 54ccb02001e8dd8d0e4a5911216b71e20e2c117c lib/Perl/Achievements/Command/scan.pm
-SHA1 2eb9d09e9381a5c17a6e0db6ada08e2c2c1cebc6 lib/Perl/Achievements/Report/Html.pm
-SHA1 bb0380149c9a9516b305a64bfce23e3f4b9f4026 lib/Perl/Achievements/Role/ConfigItem.pm
-SHA1 ff402666bc9fcb4b0912db29e8d198d9ffdb184e lib/Perl/Achievements/Role/Report.pm
-SHA1 bbca0b18a1342fe78255347ecb4e8215a73a474d lib/Perl/Achievements/User.pm
+SHA1 9dde3bfa7aead2ecd8c1ae37aea31fc9c634c123 lib/Perl/Achievements.pm
+SHA1 7148ba21260fe68179b3721aea10c5d527dc97a3 lib/Perl/Achievements/Achievement.pm
+SHA1 536dd3b7ba578e977010d904b81bfde7bf50da30 lib/Perl/Achievements/Achievement/Cryptomancer.pm
+SHA1 b75c2f4f4ef7a03221b2a3b504d08e79de75b225 lib/Perl/Achievements/Achievement/PerlAchiever.pm
+SHA1 1dcde5290492dd6426dfdd48ea417c39dfad6d68 lib/Perl/Achievements/Achievement/PerlHacker.pm
+SHA1 12a0e65ee4515c4685f1b2d22b48217bfa5a6dbb lib/Perl/Achievements/Achievement/WeekendWarrior.pm
+SHA1 f0d330afbbb53a52ad44befab642e906ce614ade lib/Perl/Achievements/Command.pm
+SHA1 8c53286873348fbaf94a40f9151c6ae4a7a45189 lib/Perl/Achievements/Command/init.pm
+SHA1 8eed05ccd306015d47bc3980d7bd5a1c2f8a3f80 lib/Perl/Achievements/Command/report.pm
+SHA1 edff0df90f96c86e559cadb12465302f8126b880 lib/Perl/Achievements/Command/scan.pm
+SHA1 1e06e53207b4d0a0194a18cfc28ba6421db5d7d1 lib/Perl/Achievements/Report/Html.pm
+SHA1 ca851d2fa41b7abd96b8f264b848b7ed587b13aa lib/Perl/Achievements/Role/ConfigItem.pm
+SHA1 98e463c47bb67cc6bff8870d98bcd2c208f55fce lib/Perl/Achievements/Role/Report.pm
+SHA1 20cef31fd30863421d55b26af84bc6119b9eea88 lib/Perl/Achievements/User.pm
 SHA1 473906254ecd96009795d4b7fbc82fac48c03ecd t/000-report-versions.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk8wgDEACgkQ34Hwf+GwC4yUEwCdHaCEVezV9sEYpX7R30rYYZHQ
-GcMAoLvVXptF1sJQY4Bnv8xpUyn2etGO
-=bE0E
+iEYEARECAAYFAk8zJecACgkQ34Hwf+GwC4zQdwCdH39ewT6vWUb3Uu/4KIdXFFUn
+LnwAn0o6Fk5j0pXQv0KG/DBElTvFE2n1
+=l9zP
 -----END PGP SIGNATURE-----

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::report::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::report::VERSION = '0.2.1';
+  $Perl::Achievements::Command::report::VERSION = '0.2.2';
 }
 # ABSTRACT: generates a report of one's achievements
 
@@ -34,7 +34,7 @@ Perl::Achievements::Command::report - generates a report of one's achievements
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 SYNOPSIS
 

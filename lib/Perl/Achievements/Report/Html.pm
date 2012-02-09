@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Report::Html::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Report::Html::VERSION = '0.2.1';
+  $Perl::Achievements::Report::Html::VERSION = '0.2.2';
 }
 
 use 5.10.0;
@@ -38,7 +38,8 @@ template page => sub {
             show( 'pa_signature' );
 
             h1 {
-                $self->who . "'s Perl Achievements";
+                say $self->who, "'s " if $self->who;
+                say "Perl Achievements";
             };
 
             for ( values %latest ) {
@@ -143,7 +144,7 @@ Perl::Achievements::Report::Html
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 AUTHOR
 

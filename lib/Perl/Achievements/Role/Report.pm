@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Role::Report::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Role::Report::VERSION = '0.2.1';
+  $Perl::Achievements::Role::Report::VERSION = '0.2.2';
 }
 
 use strict;
@@ -15,8 +15,7 @@ requires qw/ generate /;
 
 has who => (
     is => 'ro',
-    isa => 'Str',
-    required => 1,
+    isa => 'Str|Undef',
 );
 
 has history => (
@@ -35,7 +34,7 @@ Perl::Achievements::Role::Report
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 AUTHOR
 

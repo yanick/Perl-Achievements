@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::scan::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::scan::VERSION = '0.2.1';
+  $Perl::Achievements::Command::scan::VERSION = '0.2.2';
 }
 # ABSTRACT: inspects scripts/modules for achievements
 
@@ -37,7 +37,7 @@ Perl::Achievements::Command::scan - inspects scripts/modules for achievements
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,9 @@
 Revision history for Perl::Achievements
 
+0.2.2 2012-02-08
+ [BUG FIXES]
+ - Create and populate the config file.
+
 0.2.1 2012-02-06
  [BUG FIXES]
  - Newer Moose wasn't agreeing with 'Num|Undef' and Number trait

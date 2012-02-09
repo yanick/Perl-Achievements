@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::VERSION = '0.2.1';
+  $Perl::Achievements::Achievement::VERSION = '0.2.2';
 }
 # ABSTRACT: base role for achievements
 
@@ -143,7 +143,7 @@ Perl::Achievements::Achievement - base role for achievements
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 SYNOPSIS
 

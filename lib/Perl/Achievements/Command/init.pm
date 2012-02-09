@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::init::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::init::VERSION = '0.2.1';
+  $Perl::Achievements::Command::init::VERSION = '0.2.2';
 }
 # ABSTRACT: initializes the perl-achievements environment
 
@@ -15,6 +15,8 @@ use 5.10.0;
 use strict;
 use warnings;
 
+use Path::Class qw/ file /;
+
 use Moose;
 
 extends 'Perl::Achievements::Command';
@@ -25,6 +27,9 @@ sub execute {
     $self->initialize_environment;
 
     say $self->rc, ' created';
+
+    say "you might want to edit ", file( $self->rc, 'config' ), 
+        " with your name and information";
 }
 
 
@@ -39,7 +44,7 @@ Perl::Achievements::Command::init - initializes the perl-achievements environmen
 
 =head1 VERSION
 
-version 0.2.1
+version 0.2.2
 
 =head1 SYNOPSIS
 

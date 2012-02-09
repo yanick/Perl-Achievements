@@ -64,11 +64,14 @@ with 'MooseX::Role::BuildInstanceOf' => {
 sub get_config_from_file {
     my ( $class, $file ) = @_;
 
+    return {} if not -f $file; 
+
     my $config = LoadFile( $file );
 
     # massage the config a wee bit
-    $_ = [ %$_ ] for 
-        $config->{user_args} = delete $config->{user};
+    if ( $config->{user} ) {
+        $_ = [ %$_ ] for $config->{user_args} = delete $config->{user};
+    }
 
     return $config;
 }
@@ -158,6 +161,16 @@ method initialize_environment {
     mkdir $dir;
     mkdir dir( $dir, 'achievements' );
     mkdir dir( $dir, 'scanned' );
+
+    my $config = file( $dir, 'config' )->openw;
+
+    print $config <<'END_CONFIG';
+# user: 
+#   name: Your Name Here
+#   url: http://yoursite.org/
+
+END_CONFIG
+
 }
 
 sub unlock_achievement {

@@ -9,8 +9,7 @@ requires qw/ generate /;
 
 has who => (
     is => 'ro',
-    isa => 'Str',
-    required => 1,
+    isa => 'Str|Undef',
 );
 
 has history => (

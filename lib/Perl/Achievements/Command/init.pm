@@ -23,6 +23,8 @@ use 5.10.0;
 use strict;
 use warnings;
 
+use Path::Class qw/ file /;
+
 use Moose;
 
 extends 'Perl::Achievements::Command';
@@ -33,6 +35,9 @@ sub execute {
     $self->initialize_environment;
 
     say $self->rc, ' created';
+
+    say "you might want to edit ", file( $self->rc, 'config' ), 
+        " with your name and information";
 }
 
 

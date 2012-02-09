@@ -32,7 +32,8 @@ template page => sub {
             show( 'pa_signature' );
 
             h1 {
-                $self->who . "'s Perl Achievements";
+                say $self->who, "'s " if $self->who;
+                say "Perl Achievements";
             };
 
             for ( values %latest ) {

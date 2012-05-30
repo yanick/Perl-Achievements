@@ -23,9 +23,9 @@ has transformations => (
 
 sub scan {
     my $self = shift;
-    
+
     use List::MoreUtils 'uniq';
-    
+
     # Living up to the name of...
     my $schwartzian_transformations =
       scalar                                                                                # Step 6) Superfluous but still nice to have a step 6 ;-)
@@ -49,13 +49,13 @@ sub scan {
             }
         )
       };
-      
+
     $self->inc_transformations($schwartzian_transformations // 0);
-    
+
     return unless $self->transformations >= 1** $self->level;
-    
+
     $self->inc_level;
-    
+
     $self->unlock(
         sprintf "Nice one! You have used %d schwartzian transformations all in all throughout your scans",
                 $self->transformations

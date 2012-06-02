@@ -127,6 +127,12 @@ has history => (
     },
 );
 
+has interactive => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 1,
+);
+
 method scan ($file) {
     $self->set_ppi( PPI::Document->new( $file ) );
 
@@ -193,6 +199,8 @@ sub add_to_history {
 
 after unlock_achievement => sub {
     my( $self, %info ) = @_;
+
+    return unless $self->interactive;
 
     say 'Congrats! You have unlocked a new achievement!';
 

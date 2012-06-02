@@ -125,20 +125,14 @@ is not given, increment by 1.
 
 
 has level => (
-    traits => [ 'Perl::Achievements::Role::ConfigItem' ],
-    isa => 'Num|Undef',
+    traits => [ 'Perl::Achievements::Role::ConfigItem', 'Counter' ],
+    isa => 'Num',
     is => 'rw',
-    default => undef,
+    default => 0,
+    handles => {
+        inc_level => 'inc'
+    },
 );
-
-sub inc_level {
-    my ( $self, $value ) = @_;
-    $value ||= 1;
-    $self->set_level(
-        $self->level + $value
-    );
-}
-
 
 sub get_config_from_file {
     my ( $class, $file ) = @_;

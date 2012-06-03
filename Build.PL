@@ -8,6 +8,8 @@ use Module::Build 0.3601;
 my %module_build_args = (
   "build_requires" => {
     "Carp" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
     "Module::Build" => "0.3601",
     "Scalar::Util" => 0,
     "Test::More" => "0.94"
@@ -20,7 +22,7 @@ my %module_build_args = (
     "Yanick Champoux <yanick\@cpan.org>"
   ],
   "dist_name" => "Perl-Achievements",
-  "dist_version" => "0.2.2",
+  "dist_version" => "0.3.0",
   "license" => "perl",
   "module_name" => "Perl::Achievements",
   "recommends" => {},
@@ -49,7 +51,7 @@ my %module_build_args = (
     "Template::Caribou::Tags::HTML" => 0,
     "Template::Caribou::Utils" => 0,
     "YAML::Any" => 0,
-    "perl" => "5.10.0",
+    "perl" => "v5.10.0",
     "strict" => 0,
     "warnings" => 0
   },

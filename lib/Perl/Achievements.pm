@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::VERSION = '0.2.2';
+  $Perl::Achievements::VERSION = '0.3.0';
 }
 # ABSTRACT: whoever die()s with the most badges win
 
@@ -113,6 +113,12 @@ has history => (
     },
 );
 
+has interactive => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 1,
+);
+
 method scan ($file) {
     $self->set_ppi( PPI::Document->new( $file ) );
 
@@ -180,6 +186,8 @@ sub add_to_history {
 after unlock_achievement => sub {
     my( $self, %info ) = @_;
 
+    return unless $self->interactive;
+
     say 'Congrats! You have unlocked a new achievement!';
 
     say '*' x 60;
@@ -215,7 +223,7 @@ Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.2.2
+version 0.3.0
 
 =head1 SYNOPSIS
 

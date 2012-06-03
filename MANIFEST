@@ -1,3 +1,4 @@
+AUTHOR_PLEDGE
 Build.PL
 Changes
 INSTALL
@@ -16,6 +17,7 @@ lib/Perl/Achievements/Achievement.pm
 lib/Perl/Achievements/Achievement/Cryptomancer.pm
 lib/Perl/Achievements/Achievement/PerlAchiever.pm
 lib/Perl/Achievements/Achievement/PerlHacker.pm
+lib/Perl/Achievements/Achievement/SchwartzianTransform.pm
 lib/Perl/Achievements/Achievement/WeekendWarrior.pm
 lib/Perl/Achievements/Command.pm
 lib/Perl/Achievements/Command/init.pm
@@ -25,4 +27,7 @@ lib/Perl/Achievements/Report/Html.pm
 lib/Perl/Achievements/Role/ConfigItem.pm
 lib/Perl/Achievements/Role/Report.pm
 lib/Perl/Achievements/User.pm
+t/00-compile.t
 t/000-report-versions.t
+t/perlhacker.t
+t/schwartz.t

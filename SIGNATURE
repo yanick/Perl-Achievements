@@ -14,37 +14,42 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 181f57581c61ecf1c31b43d98edc4b3cdb72ef1a Build.PL
-SHA1 054aaddd52180c11f9095cdf9a166d4396543d6b Changes
+SHA1 40c9ea02aa404fa9b59c100987e36b5aec385be4 AUTHOR_PLEDGE
+SHA1 75d9d3df0a7b7ecb47c46f7dcc403d6a4b74fc4e Build.PL
+SHA1 e0ecda0841b9888de3968807b2691262e75ad9d4 Changes
 SHA1 dca45f1350694a55d494910375d4c0f5b81a70b4 INSTALL
 SHA1 33260abc93b43a44581b0b6263d7e4318f4122bb LICENSE
-SHA1 8d2e6a807c6813be04397f60d7838341284f0408 MANIFEST
+SHA1 366f6c4809c716c8b29d1c5c99a1182da9a55cd4 MANIFEST
 SHA1 ddcedab094c480d0920667d2353c7265153fbf51 MANIFEST.SKIP
-SHA1 07ebe3c1d3d05e283566cc54705738ec8a979f8d META.json
-SHA1 14fa2671f48b5187bfc3070eb2fa7291235eda12 META.yml
-SHA1 826c526a3a933c61ba48a27ea21352dffdac8564 README
-SHA1 7a88ce0d3087eb1e7e3cfffa8ff930cd0558d45b README.mkdn
-SHA1 5797cf16d55530b038c03921298f70caa19c935e bin/perlachievements
+SHA1 c26d743a14793e0207b5ecc689aa7c306b34f9d5 META.json
+SHA1 f40a80d8d9a9eab2f7def49e62ac62b7c3ed1c42 META.yml
+SHA1 42f408ae03c654d0b58324e3042b1bacc790b1b1 README
+SHA1 383e7545c4c88b09e6ec5dff420752d01e97c4cc README.mkdn
+SHA1 bfef505857d72d49b7b55a799450bcd118d72aae bin/perlachievements
 SHA1 8a35b2e8becdde50fdd49dab0614cc22023fd257 dist.ini
-SHA1 9dde3bfa7aead2ecd8c1ae37aea31fc9c634c123 lib/Perl/Achievements.pm
-SHA1 7148ba21260fe68179b3721aea10c5d527dc97a3 lib/Perl/Achievements/Achievement.pm
-SHA1 536dd3b7ba578e977010d904b81bfde7bf50da30 lib/Perl/Achievements/Achievement/Cryptomancer.pm
-SHA1 b75c2f4f4ef7a03221b2a3b504d08e79de75b225 lib/Perl/Achievements/Achievement/PerlAchiever.pm
-SHA1 1dcde5290492dd6426dfdd48ea417c39dfad6d68 lib/Perl/Achievements/Achievement/PerlHacker.pm
-SHA1 12a0e65ee4515c4685f1b2d22b48217bfa5a6dbb lib/Perl/Achievements/Achievement/WeekendWarrior.pm
-SHA1 f0d330afbbb53a52ad44befab642e906ce614ade lib/Perl/Achievements/Command.pm
-SHA1 8c53286873348fbaf94a40f9151c6ae4a7a45189 lib/Perl/Achievements/Command/init.pm
-SHA1 8eed05ccd306015d47bc3980d7bd5a1c2f8a3f80 lib/Perl/Achievements/Command/report.pm
-SHA1 edff0df90f96c86e559cadb12465302f8126b880 lib/Perl/Achievements/Command/scan.pm
-SHA1 1e06e53207b4d0a0194a18cfc28ba6421db5d7d1 lib/Perl/Achievements/Report/Html.pm
-SHA1 ca851d2fa41b7abd96b8f264b848b7ed587b13aa lib/Perl/Achievements/Role/ConfigItem.pm
-SHA1 98e463c47bb67cc6bff8870d98bcd2c208f55fce lib/Perl/Achievements/Role/Report.pm
-SHA1 20cef31fd30863421d55b26af84bc6119b9eea88 lib/Perl/Achievements/User.pm
+SHA1 65c96f95f6648e7aab230526eb99a73b97b5b267 lib/Perl/Achievements.pm
+SHA1 9fff5d9a55e6cd5cfc02d33f1746a5bc5460d20e lib/Perl/Achievements/Achievement.pm
+SHA1 6742537782b85e1fe4471c83530114d1f3a93966 lib/Perl/Achievements/Achievement/Cryptomancer.pm
+SHA1 44a0346c2126ea4f8c396115f6e0c92f939def44 lib/Perl/Achievements/Achievement/PerlAchiever.pm
+SHA1 cfa1df3640cc8730b2439acb25f1a15c55957031 lib/Perl/Achievements/Achievement/PerlHacker.pm
+SHA1 3c56ba61347739e51eff89f8399e23e022ae5b7c lib/Perl/Achievements/Achievement/SchwartzianTransform.pm
+SHA1 d66dbc05aab1aeed8445f2f7060557a061a20fdf lib/Perl/Achievements/Achievement/WeekendWarrior.pm
+SHA1 1583493949f2d487433c7d2d51f467fa8019e271 lib/Perl/Achievements/Command.pm
+SHA1 91994fc1909e7c56da4b0f80e6f3fe469258bb2d lib/Perl/Achievements/Command/init.pm
+SHA1 10a8fc885b902f68f09a9b1953a525dbfe3eb1b9 lib/Perl/Achievements/Command/report.pm
+SHA1 5bf406524a3b084c7dd2ea9a068d0f9469a824fe lib/Perl/Achievements/Command/scan.pm
+SHA1 e49daeab25471b133ab2ad24e4dc9141e437a420 lib/Perl/Achievements/Report/Html.pm
+SHA1 aa21a52c60c480732f4d855a12adfbb378b0e559 lib/Perl/Achievements/Role/ConfigItem.pm
+SHA1 5c7da7ba302aa401515ee76b9caa1c0ffd8c8fcb lib/Perl/Achievements/Role/Report.pm
+SHA1 fcd1a7b90305ea854f690fe4ab5b11ac270ece1c lib/Perl/Achievements/User.pm
+SHA1 3cbe905b92fbc69d59a06031d5ce6c837b352aa2 t/00-compile.t
 SHA1 473906254ecd96009795d4b7fbc82fac48c03ecd t/000-report-versions.t
+SHA1 2876887ecd920a7d24a699045e431e83dbddee63 t/perlhacker.t
+SHA1 f72faaa2d96ae141112dbc28ad09f93d82aec0c1 t/schwartz.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.11 (GNU/Linux)
 
-iEYEARECAAYFAk8zJecACgkQ34Hwf+GwC4zQdwCdH39ewT6vWUb3Uu/4KIdXFFUn
-LnwAn0o6Fk5j0pXQv0KG/DBElTvFE2n1
-=l9zP
+iEYEARECAAYFAk/KrEMACgkQ34Hwf+GwC4ypBQCfU30eje1S88aplnmVkF6fMi8M
+q4UAn2iRaw9cZdmDxL1vZ2PaER7AmoqV
+=9Fu8
 -----END PGP SIGNATURE-----

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Report::Html::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Report::Html::VERSION = '0.2.2';
+  $Perl::Achievements::Report::Html::VERSION = '0.3.0';
 }
 
 use 5.10.0;
@@ -144,7 +144,7 @@ Perl::Achievements::Report::Html
 
 =head1 VERSION
 
-version 0.2.2
+version 0.3.0
 
 =head1 AUTHOR
 

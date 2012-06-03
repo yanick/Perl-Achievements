@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::init::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::init::VERSION = '0.2.2';
+  $Perl::Achievements::Command::init::VERSION = '0.3.0';
 }
 # ABSTRACT: initializes the perl-achievements environment
 
@@ -44,7 +44,7 @@ Perl::Achievements::Command::init - initializes the perl-achievements environmen
 
 =head1 VERSION
 
-version 0.2.2
+version 0.3.0
 
 =head1 SYNOPSIS
 

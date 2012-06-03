@@ -2,7 +2,7 @@ NAME
     Perl::Achievements - whoever die()s with the most badges win
 
 VERSION
-    version 0.2.2
+    version 0.3.0
 
 SYNOPSIS
         use Perl::Achievements;

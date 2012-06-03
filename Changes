@@ -6,6 +6,7 @@ Revision history for Perl::Achievements
  [BUG FIXES]
 
  [ENHANCEMENTS]
+ - New Schwartzian Transform achievement (contributed by Daniel Bruder)
 
 0.2.2 2012-02-08
  [BUG FIXES]

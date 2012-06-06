@@ -62,7 +62,7 @@ with 'MooseX::Role::BuildInstanceOf' => {
 };
 
 sub get_config_from_file {
-    my ( $class, $file ) = @_;
+    my ( undef, $file ) = @_;
 
     return {} if not -f $file; 
 

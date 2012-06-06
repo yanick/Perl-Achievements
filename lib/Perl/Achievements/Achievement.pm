@@ -135,7 +135,7 @@ has level => (
 );
 
 sub get_config_from_file {
-    my ( $class, $file ) = @_;
+    my ( undef, $file ) = @_;
 
     return -f $file ? LoadFile( $file ) : {};
 }

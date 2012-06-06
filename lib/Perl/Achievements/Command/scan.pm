@@ -21,7 +21,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my ( $self, undef, $args ) = @_;
 
     for ( @$args ) {
         $self->log_debug( "scanning '$_'..." );

@@ -22,7 +22,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my ( $self ) = @_;
 
     print $self->generate_report( 'html' );
 }

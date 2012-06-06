@@ -31,3 +31,4 @@ t/00-compile.t
 t/000-report-versions.t
 t/perlhacker.t
 t/schwartz.t
+xt/release/unused-vars.t

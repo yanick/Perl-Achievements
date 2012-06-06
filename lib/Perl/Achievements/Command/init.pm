@@ -30,7 +30,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my $self = shift;
 
     $self->initialize_environment;
 

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::SchwartzianTransform::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::SchwartzianTransform::VERSION = '0.3.0';
+  $Perl::Achievements::Achievement::SchwartzianTransform::VERSION = '0.4.0';
 }
 # ABSTRACT: code uses schwartzian transformations
 
@@ -83,7 +83,7 @@ Perl::Achievements::Achievement::SchwartzianTransform - code uses schwartzian tr
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 AUTHORS
 

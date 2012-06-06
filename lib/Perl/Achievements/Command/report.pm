@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::report::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::report::VERSION = '0.3.0';
+  $Perl::Achievements::Command::report::VERSION = '0.4.0';
 }
 # ABSTRACT: generates a report of one's achievements
 
@@ -18,7 +18,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my ( $self ) = @_;
 
     print $self->generate_report( 'html' );
 }
@@ -34,7 +34,7 @@ Perl::Achievements::Command::report - generates a report of one's achievements
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 SYNOPSIS
 

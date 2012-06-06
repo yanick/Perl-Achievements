@@ -1,11 +1,15 @@
 Revision history for Perl::Achievements
 
+0.4.0 2012-06-05
+ [ENHANCEMENTS]
+ - add 'dry_run' option (useful for testing)
+
+ [STATISTICS]
+ - code churn: 9 files changed, 27 insertions(+), 8 deletions(-)
+
 0.3.0 2012-06-02
  [ENHANCEMENTS]
  - New Schwartzian Transform achievement (contributed by Daniel Bruder)
-
- [STATISTICS]
- - code churn: 1 files changed, 2 insertions(+), 0 deletions(-)
 
 0.2.2 2012-02-08
  [BUG FIXES]

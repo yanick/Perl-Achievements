@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::scan::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::scan::VERSION = '0.3.0';
+  $Perl::Achievements::Command::scan::VERSION = '0.4.0';
 }
 # ABSTRACT: inspects scripts/modules for achievements
 
@@ -18,7 +18,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my ( $self, undef, $args ) = @_;
 
     for ( @$args ) {
         $self->log_debug( "scanning '$_'..." );
@@ -37,7 +37,7 @@ Perl::Achievements::Command::scan - inspects scripts/modules for achievements
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 SYNOPSIS
 

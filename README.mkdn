@@ -4,7 +4,7 @@ Perl::Achievements - whoever die()s with the most badges win
 
 # VERSION
 
-version 0.3.0
+version 0.4.0
 
 # SYNOPSIS
 

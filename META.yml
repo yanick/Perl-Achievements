@@ -21,49 +21,49 @@ name: Perl-Achievements
 provides:
   Perl::Achievements:
     file: lib/Perl/Achievements.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement:
     file: lib/Perl/Achievements/Achievement.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement::Cryptomancer:
     file: lib/Perl/Achievements/Achievement/Cryptomancer.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement::PerlAchiever:
     file: lib/Perl/Achievements/Achievement/PerlAchiever.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement::PerlHacker:
     file: lib/Perl/Achievements/Achievement/PerlHacker.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement::SchwartzianTransform:
     file: lib/Perl/Achievements/Achievement/SchwartzianTransform.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Achievement::WeekendWarrior:
     file: lib/Perl/Achievements/Achievement/WeekendWarrior.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Command:
     file: lib/Perl/Achievements/Command.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Command::init:
     file: lib/Perl/Achievements/Command/init.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Command::report:
     file: lib/Perl/Achievements/Command/report.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Command::scan:
     file: lib/Perl/Achievements/Command/scan.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Report::Html:
     file: lib/Perl/Achievements/Report/Html.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Role::ConfigItem:
     file: lib/Perl/Achievements/Role/ConfigItem.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::Role::Report:
     file: lib/Perl/Achievements/Role/Report.pm
-    version: v0.3.0
+    version: v0.4.0
   Perl::Achievements::User:
     file: lib/Perl/Achievements/User.pm
-    version: v0.3.0
+    version: v0.4.0
 requires:
   Data::Printer: 0
   DateTime::Functions: 0
@@ -95,7 +95,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Perl-Achievements
   homepage: http://search.cpan.org/dist/Perl-Achievements/
   repository: https://github.com/yanick/Perl-Achievements.git
-version: 0.3.0
+version: 0.4.0
 x_author_pledge:
   version: 1
 x_authority: cpan:YANICK

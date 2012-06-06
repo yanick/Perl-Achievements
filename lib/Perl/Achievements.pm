@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::VERSION = '0.3.0';
+  $Perl::Achievements::VERSION = '0.4.0';
 }
 # ABSTRACT: whoever die()s with the most badges win
 
@@ -48,7 +48,7 @@ with 'MooseX::Role::BuildInstanceOf' => {
 };
 
 sub get_config_from_file {
-    my ( $class, $file ) = @_;
+    my ( undef, $file ) = @_;
 
     return {} if not -f $file; 
 
@@ -119,6 +119,12 @@ has interactive => (
     default => 1,
 );
 
+has dry_run => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 method scan ($file) {
     $self->set_ppi( PPI::Document->new( $file ) );
 
@@ -172,7 +178,7 @@ sub unlock_achievement {
         . p( %info, colored => 0 )
     );
 
-    $self->add_to_history( %info );
+    $self->add_to_history( %info ) unless $self->dry_run;
 }
 
 sub add_to_history {
@@ -223,7 +229,7 @@ Perl::Achievements - whoever die()s with the most badges win
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Command::init::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Command::init::VERSION = '0.3.0';
+  $Perl::Achievements::Command::init::VERSION = '0.4.0';
 }
 # ABSTRACT: initializes the perl-achievements environment
 
@@ -22,7 +22,7 @@ use Moose;
 extends 'Perl::Achievements::Command';
 
 sub execute {
-    my ( $self, $opt, $args ) = @_;
+    my $self = shift;
 
     $self->initialize_environment;
 
@@ -44,7 +44,7 @@ Perl::Achievements::Command::init - initializes the perl-achievements environmen
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::PerlHacker::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::PerlHacker::VERSION = '0.3.0';
+  $Perl::Achievements::Achievement::PerlHacker::VERSION = '0.4.0';
 }
 # ABSTRACT: just another Perl hacker
 
@@ -47,7 +47,7 @@ Perl::Achievements::Achievement::PerlHacker - just another Perl hacker
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 AUTHOR
 

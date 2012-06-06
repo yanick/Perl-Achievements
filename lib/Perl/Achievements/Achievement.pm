@@ -3,7 +3,7 @@ BEGIN {
   $Perl::Achievements::Achievement::AUTHORITY = 'cpan:YANICK';
 }
 {
-  $Perl::Achievements::Achievement::VERSION = '0.3.0';
+  $Perl::Achievements::Achievement::VERSION = '0.4.0';
 }
 # ABSTRACT: base role for achievements
 
@@ -28,7 +28,7 @@ requires qw/ scan /;
 has 'app' => (
     required => 1,
     is => 'ro',
-    handles => [ qw/ ppi log log_debug / ],
+    handles => [ qw/ ppi log log_debug dry_run / ],
 );
 
 
@@ -45,7 +45,7 @@ has level => (
 );
 
 sub get_config_from_file {
-    my ( $class, $file ) = @_;
+    my ( undef, $file ) = @_;
 
     return -f $file ? LoadFile( $file ) : {};
 }
@@ -100,7 +100,7 @@ after scan => sub {
     $self->log_debug( 'storing state of ' . ref $self );
 
     $self->store( "".$self->app->rc_file_path( 
-        'achievements', $self->storage_file ) );
+        'achievements', $self->storage_file ) ) unless $self->dry_run;
 };
 
 sub pack {
@@ -137,7 +137,7 @@ Perl::Achievements::Achievement - base role for achievements
 
 =head1 VERSION
 
-version 0.3.0
+version 0.4.0
 
 =head1 SYNOPSIS
 

@@ -102,7 +102,7 @@ Debug-level logging.
 has 'app' => (
     required => 1,
     is => 'ro',
-    handles => [ qw/ ppi log log_debug / ],
+    handles => [ qw/ ppi log log_debug dry_run / ],
 );
 
 =head2 level()
@@ -199,7 +199,7 @@ after scan => sub {
     $self->log_debug( 'storing state of ' . ref $self );
 
     $self->store( "".$self->app->rc_file_path( 
-        'achievements', $self->storage_file ) );
+        'achievements', $self->storage_file ) ) unless $self->dry_run;
 };
 
 sub pack {

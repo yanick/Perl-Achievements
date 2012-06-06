@@ -7,6 +7,7 @@ use Perl::Achievements;
 
 my $pa = Perl::Achievements->new(
     interactive => 0,
+    dry_run => 1,
 );
 
 my $ach = Perl::Achievements::Achievement::SchwartzianTransform->new(

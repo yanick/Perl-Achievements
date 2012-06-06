@@ -133,6 +133,12 @@ has interactive => (
     default => 1,
 );
 
+has dry_run => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 method scan ($file) {
     $self->set_ppi( PPI::Document->new( $file ) );
 
@@ -186,7 +192,7 @@ sub unlock_achievement {
         . p( %info, colored => 0 )
     );
 
-    $self->add_to_history( %info );
+    $self->add_to_history( %info ) unless $self->dry_run;
 }
 
 sub add_to_history {
